@@ -16,10 +16,24 @@ struct ProductListView: View {
     
     @Query(sort: \ProductEntity.category) private var products: [ProductEntity]
     
+    private var calculatedProducts: [ProductEntity] {
+        
+        if searchQuery.isEmpty {
+            return products
+        }
+        
+        let searchResult = products.compactMap { product in
+            let titleContainsQuery = product.title.contains(searchQuery)
+            return titleContainsQuery ? product : nil
+        }
+        
+        return searchResult
+    }
+    
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(viewModel.productResult?.products ?? []) { product in
+                ForEach(calculatedProducts) { product in
                     NavigationLink(destination: ProductDetailView(product: product)) {
                         ProductCellView(product: product)
                     }

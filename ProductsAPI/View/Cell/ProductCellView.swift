@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProductCellView: View {
     
-    let product: ProductDto
+    let product: ProductEntity
     
     var body: some View {
         HStack {
@@ -51,5 +51,5 @@ struct ProductCellView: View {
 }
 
 #Preview {
-    ProductCellView(product: ProductDto(id: 0, title: "Iphone 9", description: "An apple mobile which is nothing like apple", price: 549, discountPercentage: 5.0, rating: 3.0, stock: 4, brand: "Apple", category: "smartphones", thumbnail: URL(string: "https://i.dummyjson.com/data/products/1/thumbnail.jpg")!, images: []))
+    ProductCellView(product: ProductEntity(id: 0, title: "Iphone 9", descriptionProperty: "An apple mobile which is nothing like apple", price: 549, discountPercentage: 5.0, rating: 3.0, stock: 4, brand: "Apple", category: "smartphones", thumbnail: URL(string: "https://i.dummyjson.com/data/products/1/thumbnail.jpg")!, images: []))
 }

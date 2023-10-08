@@ -37,6 +37,7 @@ class ProductViewModel: ObservableObject {
             case .success(let data):
                 productResult = data
                 fetchingProducts = false
+                offlineCacheProducts()
             case .failure(let error):
                 fetchFailedWithError = error
                 fetchingProducts = false

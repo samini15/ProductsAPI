@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProductDetailView: View {
-    let product: ProductDto
+    let product: ProductEntity
     var body: some View {
         VStack(spacing: 0) {
             TabView {
@@ -55,7 +55,7 @@ struct ProductDetailView: View {
                             TextWithRoundedRectangleOverlay(displayText: String(product.stock), color: .mint)
                         }
                     }
-                    Text(product.description)
+                    Text(product.descriptionProperty)
                         .padding(.top, 10)
                 }
                 .padding(.horizontal, 20)
@@ -79,5 +79,5 @@ struct ProductDetailView: View {
 }
 
 #Preview {
-    ProductDetailView(product: ProductDto(id: 0, title: "Iphone 9", description: "An apple mobile which is nothing like apple", price: 549, discountPercentage: 5.0, rating: 3.0, stock: 4, brand: "Apple", category: "smartphones", thumbnail: URL(string: "https://i.dummyjson.com/data/products/1/thumbnail.jpg")!, images: [URL(string: "https://i.dummyjson.com/data/products/1/1.jpg")!, URL(string: "https://i.dummyjson.com/data/products/1/2.jpg")!, URL(string: "https://i.dummyjson.com/data/products/1/3.jpg")!]))
+    ProductDetailView(product: ProductEntity(id: 0, title: "Iphone 9", descriptionProperty: "An apple mobile which is nothing like apple", price: 549, discountPercentage: 5.0, rating: 3.0, stock: 4, brand: "Apple", category: "smartphones", thumbnail: URL(string: "https://i.dummyjson.com/data/products/1/thumbnail.jpg")!, images: [URL(string: "https://i.dummyjson.com/data/products/1/1.jpg")!, URL(string: "https://i.dummyjson.com/data/products/1/2.jpg")!, URL(string: "https://i.dummyjson.com/data/products/1/3.jpg")!]))
 }
