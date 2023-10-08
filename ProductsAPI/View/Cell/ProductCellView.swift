@@ -36,14 +36,6 @@ struct ProductCellView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(.green.opacity(0.3))
                         }
-                    
-                    Text(product.category)
-                        .padding(.horizontal, 7)
-                        .padding(.vertical, 5)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.brown.opacity(0.3))
-                        }
                 }
             }
         }

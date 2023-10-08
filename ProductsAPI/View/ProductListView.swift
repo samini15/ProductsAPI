@@ -16,16 +16,14 @@ struct ProductListView: View {
     
     @Query(sort: \ProductEntity.category) private var products: [ProductEntity]
     
-    private var calculatedProducts: [ProductEntity] {
+    private var calculatedProducts: [String : [ProductEntity]] {
+        
+        let productsByCategory = groupProductsByCategory(products: products)
         
         if searchQuery.isEmpty {
-            return products
+            return productsByCategory
         }
-        
-        let searchResult = products.compactMap { product in
-            let titleContainsQuery = product.title.contains(searchQuery)
-            return titleContainsQuery ? product : nil
-        }
+        let searchResult = searchProducts(products: productsByCategory)
         
         return searchResult
     }
@@ -33,9 +31,13 @@ struct ProductListView: View {
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(calculatedProducts) { product in
-                    NavigationLink(destination: ProductDetailView(product: product)) {
-                        ProductCellView(product: product)
+                ForEach(Array(calculatedProducts.keys), id: \.self) { category in
+                    Section(header: Text(category).font(.headline)) {
+                        ForEach(calculatedProducts[category] ?? []) { product in
+                            NavigationLink(destination: ProductDetailView(product: product)) {
+                                ProductCellView(product: product)
+                            }
+                        }
                     }
                 }
             }
@@ -58,6 +60,25 @@ struct ProductListView: View {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    private func groupProductsByCategory(products: [ProductEntity]) -> [String : [ProductEntity]] {
+        return Dictionary(grouping: products) { prod in
+            prod.category
+        }
+    }
+    
+    private func searchProducts(products: [String : [ProductEntity]]) -> [String : [ProductEntity]] {
+        var searchedItems: [ProductEntity] = []
+        products.forEach { (key: String, value: [ProductEntity]) in
+            let products = value.compactMap { product in
+                let titleContainsQuery = product.title.contains(searchQuery)
+                return titleContainsQuery ? product : nil
+            }
+            searchedItems.append(contentsOf: products)
+        }
+        
+        return groupProductsByCategory(products: searchedItems)
     }
 }
 
