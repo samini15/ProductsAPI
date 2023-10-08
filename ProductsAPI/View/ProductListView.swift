@@ -12,8 +12,10 @@ struct ProductListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var viewModel: ProductViewModel
     
+    @State private var searchQuery: String = ""
+    
     @Query(sort: \ProductEntity.category) private var products: [ProductEntity]
-
+    
     var body: some View {
         NavigationSplitView {
             List {
@@ -30,6 +32,7 @@ struct ProductListView: View {
         .task {
             await fetchData(forceRefresh: false)
         }
+        .searchable(text: $searchQuery, prompt: "Search Products")
     }
     
     private func fetchData(forceRefresh: Bool) async {
