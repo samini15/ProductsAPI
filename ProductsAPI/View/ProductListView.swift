@@ -12,7 +12,7 @@ struct ProductListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var viewModel: ProductViewModel
     
-    //@Query private var items: [Item]
+    @Query(sort: \ProductEntity.category) private var products: [ProductEntity]
 
     var body: some View {
         NavigationSplitView {
@@ -33,31 +33,19 @@ struct ProductListView: View {
     }
     
     private func fetchData(forceRefresh: Bool) async {
-        do {
-            try await viewModel.fetchProducts()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-
-    /*private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+        viewModel.modelContext = modelContext
+        if products.isEmpty {
+            do {
+                try await viewModel.fetchProducts()
+            } catch {
+                print(error.localizedDescription)
             }
         }
-    }*/
+    }
 }
 
 #Preview {
     ProductListView()
         .environmentObject(ProductViewModel(productService: ProductService()))
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: ProductEntity.self, inMemory: true)
 }
