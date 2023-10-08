@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct ProductsAPIApp: App {
     @StateObject var productViewModel: ProductViewModel = ProductViewModel(productService: ProductService())
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,

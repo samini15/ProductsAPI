@@ -18,13 +18,12 @@ struct ProductListView: View {
         NavigationSplitView {
             List {
                 ForEach(viewModel.productResult?.products ?? []) { product in
-                    NavigationLink {
-                        Text(product.title)
-                    } label: {
-                        Text(product.title)
+                    NavigationLink(destination: ProductDetailView()) {
+                        ProductCellView(product: product)
                     }
                 }
             }
+            .navigationTitle("Products")
         } detail: {
             Text("Select an item")
         }
