@@ -18,7 +18,7 @@ struct ProductListView: View {
         NavigationSplitView {
             List {
                 ForEach(viewModel.productResult?.products ?? []) { product in
-                    NavigationLink(destination: ProductDetailView()) {
+                    NavigationLink(destination: ProductDetailView(product: product)) {
                         ProductCellView(product: product)
                     }
                 }

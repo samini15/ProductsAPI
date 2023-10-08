@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct TextWithRoundedRectangleOverlay: View {
+    
+    let displayText: String
+    let color: Color
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(displayText)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .padding(.horizontal, 13)
+            .padding(.vertical, 5)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(color.opacity(0.3))
+            }
+            .shadow(radius: 20, x: 0, y: 5)
     }
 }
 
 #Preview {
-    TextWithRoundedRectangleOverlay()
+    TextWithRoundedRectangleOverlay(displayText: "Product", color: .blue)
 }
