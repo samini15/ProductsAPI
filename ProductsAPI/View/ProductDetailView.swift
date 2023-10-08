@@ -23,7 +23,6 @@ struct ProductDetailView: View {
                     }
                 }.ignoresSafeArea(.all, edges: .top)
             }
-            //.frame(height: UIScreen.main.bounds.height / 3)
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
             .ignoresSafeArea(.all, edges: .top)
@@ -34,11 +33,15 @@ struct ProductDetailView: View {
                         .fontWeight(.semibold)
                         .font(.title2)
                         .padding()
+                    TextWithRoundedRectangleOverlay(displayText: "\(String(product.price))$", color: .green)
+                    
                     Spacer()
+                    
                     Text(String(product.rating))
                     Image(systemName: "star.fill")
                         .padding(.trailing)
                 }
+                
                 Divider()
                 
                 VStack(alignment: .leading, spacing: 0) {
@@ -47,8 +50,6 @@ struct ProductDetailView: View {
                             TextWithRoundedRectangleOverlay(displayText: product.category, color: .brown)
                             
                             TextWithRoundedRectangleOverlay(displayText: product.brand, color: .cyan)
-                                
-                            TextWithRoundedRectangleOverlay(displayText: "\(String(product.price))$", color: .green)
                                 
                             TextWithRoundedRectangleOverlay(displayText: "\(String(product.discountPercentage))%", color: .orange)
                             
@@ -70,7 +71,7 @@ struct ProductDetailView: View {
                         
                 }.buttonStyle(.borderedProminent)
                     .tint(.green.opacity(0.8))
-                    .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                    .shadow(radius: 10)
                     .padding(.top, 30)
                     
             }

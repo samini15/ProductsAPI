@@ -28,15 +28,10 @@ struct ProductCellView: View {
                 Text(product.title)
                     .font(.title2)
                 
-                HStack {
-                    Text("\((String(product.price)))$")
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.green.opacity(0.3))
-                        }
-                }
+                
+                TextWithRoundedRectangleOverlay(displayText: product.category, color: .brown)
+                
+                TextWithRoundedRectangleOverlay(displayText: "\((String(product.price)))$", color: .green)
             }
         }
     }
