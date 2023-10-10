@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ProductDetailView: View {
+    
     let product: ProductEntity
+    
     var body: some View {
         VStack(spacing: 0) {
             TabView {
@@ -47,12 +49,16 @@ struct ProductDetailView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
+                            Text("Category:")
                             TextWithRoundedRectangleOverlay(displayText: product.category, color: .brown)
                             
+                            Text("Brand:")
                             TextWithRoundedRectangleOverlay(displayText: product.brand, color: .cyan)
-                                
+                            
+                            Text("Discount:")
                             TextWithRoundedRectangleOverlay(displayText: "\(String(product.discountPercentage))%", color: .orange)
                             
+                            Text("In stock:")
                             TextWithRoundedRectangleOverlay(displayText: String(product.stock), color: .mint)
                         }
                     }
@@ -65,15 +71,6 @@ struct ProductDetailView: View {
                 .blendMode(.hardLight)
                 .cornerRadius(15)
                 .shadow(radius: 10, x: 0, y: 10)
-                    
-                    
-                Button("Add to favorites") {
-                        
-                }.buttonStyle(.borderedProminent)
-                    .tint(.green.opacity(0.8))
-                    .shadow(radius: 10)
-                    .padding(.top, 30)
-                    
             }
         }
     }
