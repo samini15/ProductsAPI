@@ -1,6 +1,6 @@
 # ProductsAPI
 
-Project realized in SwiftUI which aims to showcase the interaction with an API, store data locally and display the data.
+Simple project realized in SwiftUI which aims to showcase the interaction with an API, store data locally and display the data.
 
 The following frameworks and techniques have been used:
 
