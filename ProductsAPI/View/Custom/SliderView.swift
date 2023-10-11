@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct SliderView: View {
+    @Binding var sliderValue: Double
+    
+    let label: String
+    let minValue: Double
+    let maxValue: Double
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                Text(label)
+                Slider(value: $sliderValue, in: minValue...maxValue) {
+                    
+                } minimumValueLabel: {
+                    Text(String(Int(minValue)))
+                } maximumValueLabel: {
+                    Text(String(Int(maxValue)))
+                }
+            }
+            Text("\(Int(sliderValue))$")
+        }
     }
 }
 
 #Preview {
-    SliderView()
+    SliderView(sliderValue: .constant(50.0), label: "Price", minValue: 0, maxValue: 3000)
 }

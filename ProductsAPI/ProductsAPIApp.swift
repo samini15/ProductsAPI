@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct ProductsAPIApp: App {
     @StateObject var productViewModel: ProductViewModel = ProductViewModel(productService: ProductService())
+    @StateObject var advanceFilterViewModel: AdvanceFilterViewModel = AdvanceFilterViewModel()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -28,8 +29,9 @@ struct ProductsAPIApp: App {
     var body: some Scene {
         WindowGroup {
             ProductListView()
-                .environmentObject(ProductViewModel(productService: ProductService()))
         }
         .modelContainer(sharedModelContainer)
+        .environmentObject(productViewModel)
+        .environmentObject(advanceFilterViewModel)
     }
 }

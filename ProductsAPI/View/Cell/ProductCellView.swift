@@ -18,7 +18,7 @@ struct ProductCellView: View {
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(10)
-                    
+                    .clipped()
                     .shadow(color: .gray, radius: 3, x: 0, y: 0)
             } placeholder: {
                 ProgressView()
