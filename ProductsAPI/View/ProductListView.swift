@@ -11,14 +11,21 @@ import SwiftData
 struct ProductListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject private var viewModel: ProductViewModel
+    @EnvironmentObject private var advanceFilterViewModel: AdvanceFilterViewModel
     
     @State private var searchQuery: String = ""
+    @State private var openAdvanceFilterView = false
     
     @Query(sort: \ProductEntity.category) private var products: [ProductEntity]
     
     private var calculatedProducts: [String : [ProductEntity]] {
-        
-        let productsByCategory = groupProductsByCategory(products: products)
+        let filteredProducts = advanceFilterViewModel.filterResult
+        var productsByCategory: [String : [ProductEntity]]
+        if filteredProducts.isEmpty {
+            productsByCategory = groupProductsByCategory(products: products)
+        } else {
+            productsByCategory = groupProductsByCategory(products: filteredProducts)
+        }
         
         if searchQuery.isEmpty {
             return productsByCategory
@@ -42,6 +49,18 @@ struct ProductListView: View {
                 }
             }
             .navigationTitle("Products")
+            .sheet(isPresented: $openAdvanceFilterView) {
+                AdvanceFilterSheetView()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        openAdvanceFilterView = true
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                }
+            }
         } detail: {
             Text("Select an item")
         }
@@ -85,5 +104,6 @@ struct ProductListView: View {
 #Preview {
     ProductListView()
         .environmentObject(ProductViewModel(productService: ProductService()))
+        .environmentObject(AdvanceFilterViewModel())
         .modelContainer(for: ProductEntity.self, inMemory: true)
 }
