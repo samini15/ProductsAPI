@@ -10,6 +10,7 @@ The following frameworks and techniques have been used:
   * Dependency Injection
 
 
-![Simulator Screenshot - iPhone 15 Pro - 2023-10-11 at 11 10 06](https://github.com/samini15/ProductsAPI/assets/27858103/35a9ce3f-598c-4ac2-9f26-a8faf3065122)
+![Simulator Screenshot - iPhone 15 Pro - 2023-10-11 at 11 10 06](https://github.com/samini15/ProductsAPI/assets/27858103/74dec767-5c93-4343-aad6-accef337865e)
+
 
 
