@@ -9,8 +9,8 @@ The following frameworks and techniques have been used:
   * Async/Await for network requests
   * Dependency Injection
 
+![Simulator Screenshot - iPhone 15 Pro - 2023-10-11 at 11 10 06](https://github.com/samini15/ProductsAPI/assets/27858103/ad506527-c3cf-4e3e-85f6-3fb3ce461b6b)
 
-<img width="387" alt="Capture d’écran 2023-10-10 à 13 15 49" src="https://github.com/samini15/ProductsAPI/assets/27858103/0a9225f4-1a91-45a9-873c-617d17ecf2e0">
+![Simulator Screenshot - iPhone 15 Pro - 2023-10-11 at 15 01 51](https://github.com/samini15/ProductsAPI/assets/27858103/9724bf1e-9d15-40cf-a211-8ef1156f9d7c)
 
-<img width="391" alt="Capture d’écran 2023-10-10 à 13 11 40" src="https://github.com/samini15/ProductsAPI/assets/27858103/11d26edf-d969-4716-93b4-61cf81c64591">
-
+![Simulator Screenshot - iPhone 15 Pro - 2023-10-11 at 15 03 23](https://github.com/samini15/ProductsAPI/assets/27858103/f26a004d-70b3-43c4-ad23-6ba0964f11dc)
