@@ -22,9 +22,9 @@ struct ProductListView: View {
         let filteredProducts = advanceFilterViewModel.filterResult
         var productsByCategory: [String : [ProductEntity]]
         if filteredProducts.isEmpty {
-            productsByCategory = groupProductsByCategory(products: products)
+            productsByCategory = viewModel.groupProductsByCategory(products: products)
         } else {
-            productsByCategory = groupProductsByCategory(products: filteredProducts)
+            productsByCategory = viewModel.groupProductsByCategory(products: filteredProducts)
         }
         
         if searchQuery.isEmpty {
@@ -61,6 +61,9 @@ struct ProductListView: View {
                     }
                 }
             }
+            .refreshable {
+                await fetchData(forceRefresh: true)
+            }
         } detail: {
             Text("Select an item")
         }
@@ -72,18 +75,12 @@ struct ProductListView: View {
     
     private func fetchData(forceRefresh: Bool) async {
         viewModel.modelContext = modelContext
-        if products.isEmpty {
+        if products.isEmpty || forceRefresh {
             do {
-                try await viewModel.fetchProducts()
+                try await viewModel.fetchProducts(forceRefresh: forceRefresh)
             } catch {
                 print(error.localizedDescription)
             }
-        }
-    }
-    
-    private func groupProductsByCategory(products: [ProductEntity]) -> [String : [ProductEntity]] {
-        return Dictionary(grouping: products) { prod in
-            prod.category
         }
     }
     
@@ -97,7 +94,7 @@ struct ProductListView: View {
             searchedItems.append(contentsOf: products)
         }
         
-        return groupProductsByCategory(products: searchedItems)
+        return viewModel.groupProductsByCategory(products: searchedItems)
     }
 }
 
