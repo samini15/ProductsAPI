@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProductDetailView: View {
     
@@ -15,14 +16,8 @@ struct ProductDetailView: View {
         VStack(spacing: 0) {
             TabView {
                 ForEach(product.images, id: \.self) { imageUrl in
-                    AsyncImage(url: imageUrl) { image in
-                        image
-                            .resizable()
-                    } placeholder: {
-                        ProgressView {
-                            Text("Please Wait...")
-                        }
-                    }
+                    KFImage(imageUrl)
+                        .resizable()
                 }.ignoresSafeArea(.all, edges: .top)
             }
             .tabViewStyle(PageTabViewStyle())
