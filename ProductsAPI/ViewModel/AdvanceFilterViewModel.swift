@@ -18,7 +18,8 @@ class AdvanceFilterViewModel: ObservableObject {
     func applyFilter(price: Int, category: String, brand: String, rating: String) {
         filterResult = allProducts.filter {
             $0.price <= price &&
-            ($0.category == category || $0.brand == brand) &&
+            $0.category == category &&
+            $0.brand == brand &&
             $0.rating <= Double(rating) ?? 5.0
         }
     }
